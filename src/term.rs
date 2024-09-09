@@ -447,7 +447,7 @@ impl<UserEvent: Send + 'static> Term<UserEvent> {
     pub fn term_size(&self) -> Result<(usize, usize)> {
         self.ensure_not_stopped()?;
         let termlock = self.term_lock.lock();
-        Ok(termlock.term_size()?)
+        termlock.term_size()
     }
 
     /// Clear internal buffer
@@ -455,6 +455,13 @@ impl<UserEvent: Send + 'static> Term<UserEvent> {
         self.ensure_not_stopped()?;
         let mut termlock = self.term_lock.lock();
         termlock.clear()
+    }
+
+    /// Clear internal buffer
+    pub fn clear_bla(&self) -> Result<()> {
+        self.ensure_not_stopped()?;
+        let mut termlock = self.term_lock.lock();
+        termlock.clear_bla()
     }
 
     /// Change a cell of position `(row, col)` to `cell`
@@ -548,6 +555,10 @@ impl<'a, UserEvent: Send + 'static> Canvas for TermCanvas<'a, UserEvent> {
 
     fn clear(&mut self) -> Result<()> {
         self.term.clear()
+    }
+
+    fn clear_bla(&mut self) -> Result<()> {
+        self.term.clear_bla()
     }
 
     fn put_cell(&mut self, row: usize, col: usize, cell: Cell) -> Result<usize> {
@@ -823,6 +834,10 @@ impl TermLock {
     /// clear internal buffer
     pub fn clear(&mut self) -> Result<()> {
         self.screen.clear()
+    }
+
+    pub fn clear_bla(&mut self) -> Result<()> {
+        self.screen.clear_bla()
     }
 
     /// change a cell of position `(row, col)` to `cell`

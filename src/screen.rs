@@ -234,6 +234,13 @@ impl Canvas for Screen {
         Ok(())
     }
 
+    /// clear the screen buffer
+    fn clear_bla(&mut self) -> Result<()> {
+        for cell in self.cells.iter_mut() {
+            *cell = Cell::empty_bla();
+        }
+        Ok(())
+    }
     /// change a cell of position `(row, col)` to `cell`
     fn put_cell(&mut self, row: usize, col: usize, cell: Cell) -> Result<usize> {
         let ch_width = cell.ch.width().unwrap_or(2);

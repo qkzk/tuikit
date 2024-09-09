@@ -11,6 +11,8 @@ pub trait Canvas {
     /// clear the canvas
     fn clear(&mut self) -> Result<()>;
 
+    fn clear_bla(&mut self) -> Result<()>;
+
     /// change a cell of position `(row, col)` to `cell`
     /// if `(row, col)` is out of boundary, `Ok` is returned, but no operation is taken
     /// return the width of the character/cell
@@ -102,6 +104,16 @@ impl<'a> Canvas for BoundedCanvas<'a> {
         for row in self.top..(self.top + self.height) {
             for col in self.left..(self.left + self.width) {
                 let _ = self.canvas.put_cell(row, col, Cell::empty());
+            }
+        }
+
+        Ok(())
+    }
+
+    fn clear_bla(&mut self) -> Result<()> {
+        for row in self.top..(self.top + self.height) {
+            for col in self.left..(self.left + self.width) {
+                let _ = self.canvas.put_cell(row, col, Cell::empty_bla());
             }
         }
 

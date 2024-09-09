@@ -20,8 +20,22 @@ impl Default for Cell {
 }
 
 impl Cell {
+    fn default_bla() -> Self {
+        Self {
+            ch: EMPTY_CHAR,
+            attr: Attr {
+                fg: Color::BLACK,
+                bg: Color::RED,
+                effect: Effect::empty(),
+            },
+        }
+    }
     pub fn empty() -> Self {
         Self::default().ch(EMPTY_CHAR)
+    }
+
+    pub fn empty_bla() -> Self {
+        Self::default_bla().ch(EMPTY_CHAR)
     }
 
     pub fn ch(mut self, ch: char) -> Self {
