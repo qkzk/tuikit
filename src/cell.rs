@@ -25,7 +25,7 @@ impl Cell {
             ch: EMPTY_CHAR,
             attr: Attr {
                 fg: Color::BLACK,
-                bg: Color::RED,
+                bg: Color::BLACK,
                 effect: Effect::empty(),
             },
         }
@@ -35,7 +35,7 @@ impl Cell {
     }
 
     pub fn empty_bla() -> Self {
-        Self::default_bla().ch(EMPTY_CHAR)
+        Self::default_bla()
     }
 
     pub fn ch(mut self, ch: char) -> Self {
